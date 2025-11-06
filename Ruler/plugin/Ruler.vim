@@ -1,8 +1,14 @@
 " =======================
 " ===      Ruler      ===
+" ===      Ver 1      ===
+" ===       MIT       ===
+" ===  Brian Spragge  ===
+" =======================
+
 let g:ruler_place = 79
 let b:ruler_column = g:ruler_place
 highlight Ruler ctermbg=yellow ctermfg=black
+
 " remove match if exists
 function! ClearRuler()
   if exists('w:ruler_match') && w:ruler_match >= 1
@@ -10,6 +16,7 @@ function! ClearRuler()
     unlet w:ruler_match
   endif
 endfunction
+
 " highlight ruler per buffer 
 function! HighlightRuler()
   call ClearRuler()
@@ -17,6 +24,7 @@ function! HighlightRuler()
   let l:pattern = '\%>' . l:col . 'v.\+'
   let w:ruler_match = matchadd('Ruler', l:pattern)
 endfunction
+
 " toggle ruler ability
 function! ToggleRuler()
   if exists('w:ruler_match')
@@ -25,16 +33,19 @@ function! ToggleRuler()
     call HighlightRuler()
   endif
 endfunction
+
 " set ruler placement per column ability
 function! SetRuler(column)
   let b:ruler_column = a:column
   call HighlightRuler()
 endfunction
+
 " reset ruler column to default ability
 function! ResetRuler()
   let b:ruler_column = g:ruler_place
   call HighlightRuler()
 endfunction
+
 " help message ability
 function! RulerHelp()
   echohl Title
@@ -50,6 +61,7 @@ function! RulerHelp()
   echo "  RulerToggle:   - Toggle the Ruler on/off"
   echohl None
 endfunction
+
 " defined commands
 command! Ruler call RulerHelp()
 command! RulerOn call HighlightRuler()
@@ -57,6 +69,7 @@ command! RulerOff call ClearRuler()
 command! -nargs=1 RulerSet call SetRuler(<args>) 
 command! RulerReset call ResetRuler()
 command! RulerToggle call ToggleRuler()
+
 " apply to all buffers
 autocmd BufWinEnter * call HighlightRuler()
 autocmd BufWinLeave * call ClearRuler()
