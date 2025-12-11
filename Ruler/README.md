@@ -18,5 +18,5 @@ In your terminal:
 2) cd ~/.vim/pack/plugins/start
 3) git clone https://github.com/brianspragge/Ruler.git
 
-![](Ruler_image.png)
-
+# PREVIEW
+![Ruler plugin in action](Ruler.png)
